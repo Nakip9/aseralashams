@@ -1,0 +1,405 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Brand palette — green (#398B30) + blue (#2B5EA8) */
+  --color-brand-green: #398B30;
+  --color-brand-green-light: #4FA843;
+  --color-brand-green-lighter: #6FB96B;
+  --color-brand-green-dark: #2D7028;
+  --color-brand-blue: #2B5EA8;
+  --color-brand-blue-light: #3D75BD;
+  --color-brand-blue-lighter: #5A8FCC;
+  --color-brand-blue-dark: #1F4A87;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-tajawal);
+  --font-body: var(--font-tajawal);
+  --font-heading: var(--font-cairo);
+  --font-display: var(--font-cairo);
+  --font-mono: var(--font-geist);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Eco-tech LIGHT palette — brand green (#398B30) + blue (#2B5EA8) on white */
+  --radius: 1rem;
+
+  /* Light canvas — soft warm white with green undertone */
+  --background: oklch(0.985 0.008 130);
+  --foreground: oklch(0.21 0.03 200);
+
+  /* Cards — pure white with subtle green-tinted border */
+  --card: oklch(1 0 0 / 80%);
+  --card-foreground: oklch(0.21 0.03 200);
+
+  --popover: oklch(1 0 0 / 95%);
+  --popover-foreground: oklch(0.21 0.03 200);
+
+  /* Primary — brand green #398B30 */
+  --primary: oklch(0.556 0.150 142);
+  --primary-foreground: oklch(0.99 0.01 120);
+
+  /* Secondary — brand blue #2B5EA8 */
+  --secondary: oklch(0.476 0.140 252);
+  --secondary-foreground: oklch(0.99 0.01 120);
+
+  --muted: oklch(0.96 0.01 130);
+  --muted-foreground: oklch(0.45 0.02 200);
+
+  /* Accent — lighter brand green */
+  --accent: oklch(0.652 0.130 142);
+  --accent-foreground: oklch(0.21 0.03 200);
+
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.88 0.015 180);
+  --input: oklch(0.92 0.01 180);
+  --ring: oklch(0.556 0.150 142);
+
+  /* Chart palette — alternating green/blue tints */
+  --chart-1: oklch(0.556 0.150 142);
+  --chart-2: oklch(0.476 0.140 252);
+  --chart-3: oklch(0.652 0.130 142);
+  --chart-4: oklch(0.557 0.130 252);
+  --chart-5: oklch(0.719 0.110 142);
+
+  --sidebar: oklch(0.98 0.008 130);
+  --sidebar-foreground: oklch(0.21 0.03 200);
+  --sidebar-primary: oklch(0.556 0.150 142);
+  --sidebar-primary-foreground: oklch(0.99 0.01 120);
+  --sidebar-accent: oklch(0.95 0.012 130);
+  --sidebar-accent-foreground: oklch(0.21 0.03 200);
+  --sidebar-border: oklch(0.88 0.015 180);
+  --sidebar-ring: oklch(0.556 0.150 142);
+}
+
+.dark {
+  /* Theme is dark by default; no overrides needed */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.96 0.01 130);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(oklch(0.476 0.140 252), oklch(0.556 0.150 142));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(oklch(0.556 0.150 142), oklch(0.652 0.130 142));
+  }
+
+  ::selection {
+    background: oklch(0.556 0.150 142 / 25%);
+    color: oklch(0.21 0.03 200);
+  }
+}
+
+/* Glassmorphism surface — light translucent white with green border */
+@utility glass {
+  background: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 80%),
+    oklch(0.97 0.012 130 / 60%)
+  );
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid oklch(0.556 0.150 142 / 22%);
+  box-shadow: 0 4px 24px oklch(0.556 0.150 142 / 8%);
+}
+
+@utility glass-strong {
+  background: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 92%),
+    oklch(0.97 0.012 130 / 80%)
+  );
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid oklch(0.556 0.150 142 / 28%);
+  box-shadow: 0 8px 32px oklch(0.556 0.150 142 / 10%);
+}
+
+/* Gradient text — eco green → blue (readable on light bg) */
+@utility text-gradient-solar {
+  background: linear-gradient(
+    120deg,
+    oklch(0.45 0.155 142) 0%,
+    oklch(0.556 0.150 142) 35%,
+    oklch(0.40 0.155 252) 75%,
+    oklch(0.556 0.150 142) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@utility text-gradient-glow {
+  background: linear-gradient(
+    120deg,
+    oklch(0.40 0.155 142),
+    oklch(0.556 0.150 142) 35%,
+    oklch(0.40 0.155 252) 65%,
+    oklch(0.40 0.155 142)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Glow ring — green halo */
+@utility glow-amber {
+  box-shadow:
+    0 0 0 1px oklch(0.556 0.150 142 / 25%),
+    0 0 30px oklch(0.556 0.150 142 / 28%),
+    0 0 60px oklch(0.476 0.140 252 / 18%);
+}
+
+@utility glow-amber-hover {
+  transition: box-shadow 0.4s ease;
+  &:hover {
+    box-shadow:
+      0 0 0 1px oklch(0.652 0.130 142 / 40%),
+      0 0 40px oklch(0.556 0.150 142 / 38%),
+      0 0 80px oklch(0.476 0.140 252 / 28%);
+  }
+}
+
+/* Animated gradient background — green + blue aurora */
+@utility bg-aurora {
+  background:
+    radial-gradient(at 20% 20%, oklch(0.556 0.150 142 / 18%) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, oklch(0.476 0.140 252 / 15%) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, oklch(0.652 0.130 142 / 10%) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, oklch(0.557 0.130 252 / 10%) 0px, transparent 50%);
+}
+
+/* Grid pattern background — green-tinted lines */
+@utility bg-grid {
+  background-image:
+    linear-gradient(oklch(0.556 0.150 142 / 7%) 1px, transparent 1px),
+    linear-gradient(to right, oklch(0.556 0.150 142 / 7%) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(oklch(0.556 0.150 142 / 18%) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Conic eco orb rays — alternating green & blue */
+@utility sun-rays {
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      oklch(0.556 0.150 142 / 25%) 10deg,
+      transparent 20deg,
+      transparent 30deg,
+      oklch(0.476 0.140 252 / 22%) 40deg,
+      transparent 50deg,
+      transparent 60deg,
+      oklch(0.652 0.130 142 / 25%) 70deg,
+      transparent 80deg,
+      transparent 90deg,
+      oklch(0.556 0.150 142 / 22%) 100deg,
+      transparent 110deg,
+      transparent 120deg,
+      oklch(0.557 0.130 252 / 20%) 130deg,
+      transparent 140deg,
+      transparent 150deg,
+      oklch(0.719 0.110 142 / 25%) 160deg,
+      transparent 170deg,
+      transparent 180deg,
+      oklch(0.556 0.150 142 / 22%) 190deg,
+      transparent 200deg,
+      transparent 210deg,
+      oklch(0.476 0.140 252 / 22%) 220deg,
+      transparent 230deg,
+      transparent 240deg,
+      oklch(0.652 0.130 142 / 25%) 250deg,
+      transparent 260deg,
+      transparent 270deg,
+      oklch(0.556 0.150 142 / 22%) 280deg,
+      transparent 290deg,
+      transparent 300deg,
+      oklch(0.557 0.130 252 / 20%) 310deg,
+      transparent 320deg,
+      transparent 330deg,
+      oklch(0.719 0.110 142 / 25%) 340deg,
+      transparent 350deg
+    );
+}
+
+/* No-scrollbar */
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Arabic numerals stay LTR inside RTL */
+@utility ltr-nums {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Bento card — light glass with green border + hover lift */
+.bento-card {
+  background: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 90%),
+    oklch(0.97 0.012 130 / 70%)
+  );
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid oklch(0.556 0.150 142 / 22%);
+  border-radius: var(--radius-2xl, 1.5rem);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  box-shadow: 0 4px 20px oklch(0.556 0.150 142 / 6%);
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: oklch(0.556 0.150 142 / 45%);
+  box-shadow:
+    0 0 0 1px oklch(0.556 0.150 142 / 30%),
+    0 12px 40px oklch(0.556 0.150 142 / 18%),
+    0 0 60px oklch(0.476 0.140 252 / 12%);
+}
+
+/* Keyframe animations */
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 40s linear infinite; }
+
+@keyframes spin-slower {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-spin-slower { animation: spin-slower 60s linear infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+.animate-pulse-glow { animation: pulse-glow 5s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+[dir="rtl"] .animate-marquee {
+  animation: marquee 30s linear infinite reverse;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
