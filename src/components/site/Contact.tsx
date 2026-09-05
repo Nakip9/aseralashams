@@ -25,12 +25,36 @@ export function Contact() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setSubmitting(false);
-    toast.success("تم إرسال طلبك بنجاح!", {
-      description: "سيتواصل معك فريقنا خلال 24 ساعة عمل.",
-    });
-    (e.target as HTMLFormElement).reset();
+    
+    const formData = new FormData(e.currentTarget);
+    
+    // Your Web3Forms Access Key
+    formData.append("access_key", "e279d52b-fc05-4982-94a6-df97fb713120");
+    formData.append("subject", "رسالة جديدة من موقع عصر الشمس");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        toast.success("تم إرسال طلبك بنجاح!", {
+          description: "سيتواصل معك فريقنا خلال 24 ساعة عمل.",
+        });
+        (e.target as HTMLFormElement).reset();
+      } else {
+        toast.error("حدث خطأ أثناء الإرسال.", {
+          description: "يرجى المحاولة مرة أخرى لاحقاً.",
+        });
+      }
+    } catch (error) {
+      toast.error("حدث مشكلة في الاتصال.", {
+        description: "تأكد من اتصالك بالإنترنت وحاول مجدداً.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -171,6 +195,9 @@ export function Contact() {
                 <Textarea id="message" name="message" required rows={4} placeholder="اكتب تفاصيل مشروعك: السعة المطلوبة، الموقع، نوع الاستخدام..." className="bg-white/70 border-brand-green/20 focus:border-brand-green/50 focus-visible:ring-brand-green/30 resize-none" />
               </Field>
 
+              {/* Anti-spam honeypot field */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
               <Button type="submit" disabled={submitting} className="w-full h-12 rounded-xl bg-gradient-to-r from-brand-green via-brand-green-light to-brand-blue hover:from-brand-green-light hover:to-brand-blue-lighter text-white font-bold text-base shadow-lg shadow-brand-green/25 hover:shadow-brand-green/40 transition-all disabled:opacity-70">
                 {submitting ? (
                   <span className="flex items-center gap-2">
@@ -221,4 +248,4 @@ function SocialLink({ href, label, icon }: { href: string; label: string; icon: 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-11 h-11 rounded-xl glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all hover:scale-110">{icon}</a>
   );
-}
+}   

@@ -21,15 +21,34 @@ export default function ContactPage() {
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate network request
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitting(false);
-    setSubmitted(true);
-    toast.success("تم إرسال طلبك بنجاح!", { description: "سيتواصل معك فريقنا خلال 24 ساعة عمل." });
-    (e.target as HTMLFormElement).reset();
     
-    // Hide success overlay after 5 seconds
-    setTimeout(() => setSubmitted(false), 5000);
+    const formData = new FormData(e.currentTarget);
+    
+    // Web3Forms Access Key
+    formData.append("access_key", "e279d52b-fc05-4982-94a6-df97fb713120");
+    formData.append("subject", "رسالة جديدة من صفحة اتصل بنا - عصر الشمس");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        toast.success("تم إرسال طلبك بنجاح!", { description: "سيتواصل معك فريقنا خلال 24 ساعة عمل." });
+        (e.target as HTMLFormElement).reset();
+        
+        // Hide success overlay after 5 seconds
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        toast.error("حدث خطأ أثناء الإرسال.", { description: "يرجى المحاولة مرة أخرى لاحقاً." });
+      }
+    } catch (error) {
+      toast.error("حدث مشكلة في الاتصال.", { description: "تأكد من اتصالك بالإنترنت وحاول مجدداً." });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   // The exact Google Maps location link for the button
@@ -198,6 +217,9 @@ export default function ContactPage() {
                         className="rounded-2xl bg-white border-slate-200 focus:border-brand-green focus:ring-4 focus:ring-brand-green/20 transition-all text-base p-5 resize-none shadow-sm hover:border-slate-300" 
                       />
                     </div>
+
+                    {/* Anti-spam honeypot field */}
+                    <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
                     <Button 
                       type="submit" disabled={submitting} 

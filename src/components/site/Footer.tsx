@@ -7,6 +7,7 @@ import {
   Facebook,
   Linkedin,
   MessageCircle,
+  Instagram, // Added Instagram import
 } from "lucide-react";
 import Link from "next/link";
 import { COMPANY, NAV_LINKS } from "./data";
@@ -49,10 +50,18 @@ export function Footer() {
               <a href={COMPANY.socials.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="واتساب" className="w-10 h-10 rounded-lg glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all">
                 <MessageCircle className="w-4 h-4" />
               </a>
-              <a href={COMPANY.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="فيسبوك" className="w-10 h-10 rounded-lg glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all">
+              
+              {/* Inserted Official Facebook Link */}
+              <a href="https://www.facebook.com/aseralshamscom/" target="_blank" rel="noopener noreferrer" aria-label="فيسبوك" className="w-10 h-10 rounded-lg glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href={COMPANY.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="لينكد إن" className="w-10 h-10 rounded-lg glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all">
+
+              {/* Added Official Instagram Link & Icon */}
+              <a href="https://www.instagram.com/asr_al_shams/" target="_blank" rel="noopener noreferrer" aria-label="انستغرام" className="w-10 h-10 rounded-lg glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all">
+                <Instagram className="w-4 h-4" />
+              </a>
+
+              <a href={COMPANY.socials.linkedin || "#"} target="_blank" rel="noopener noreferrer" aria-label="لينكد إن" className="w-10 h-10 rounded-lg glass flex items-center justify-center text-slate-600 hover:bg-brand-green hover:text-white transition-all">
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>

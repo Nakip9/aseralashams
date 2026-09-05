@@ -24,6 +24,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://asseralshams.com"),
   title: "عصر الشمس للاستيراد والتجارة | حلول الطاقة الشمسية في اليمن",
   description:
     "شركة عصر الشمس — رائدة في اليمن في استيراد وتركيب وتشغيل أنظمة الطاقة الشمسية. ألواح AE Solar، انفرترات Sinexcel، بطاريات Sunwoda، كابلات TOP CABLE الإسبانية.",
@@ -45,10 +46,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "عصر الشمس للاستيراد والتجارة",
     description: "حلول متكاملة وموثوقة لاستيراد، تركيب، وتشغيل أنظمة الطاقة الشمسية عالية الجودة.",
-    url: "https://aseralshams.com/",
+    url: "https://asseralshams.com/",
     siteName: "عصر الشمس",
     locale: "ar_YE",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "عصر الشمس للاستيراد والتجارة",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -67,6 +76,47 @@ export default function RootLayout({
       <body
         className={`${cairo.variable} ${tajawal.variable} ${geist.variable} antialiased bg-background text-foreground font-body`}
       >
+        {/* Local Business SEO Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EnergyBusiness",
+              "name": "عصر الشمس",
+              "image": "https://asseralshams.com/og-image.jpg",
+              "description": "شركة عصر الشمس — رائدة في اليمن في استيراد وتركيب وتشغيل أنظمة الطاقة الشمسية. ألواح AE Solar، انفرترات Sinexcel، بطاريات Sunwoda.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "صنعاء",
+                "addressCountry": "YE"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "15.3526", 
+                "longitude": "44.1537"
+              },
+              "url": "https://asseralshams.com",
+              "telephone": "+967 777705977",
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Saturday",
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday"
+                  ],
+                  "opens": "08:00",
+                  "closes": "17:00"
+                }
+              ]
+            })
+          }}
+        />
+
         {children}
         <SonnerToaster position="top-center" richColors closeButton />
       </body>
