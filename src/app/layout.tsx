@@ -24,7 +24,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://asseralshams.com"),
+  metadataBase: new URL("https://aseralshams.com"),
   title: "عصر الشمس للاستيراد والتجارة | حلول الطاقة الشمسية في اليمن",
   description:
     "شركة عصر الشمس — رائدة في اليمن في استيراد وتركيب وتشغيل أنظمة الطاقة الشمسية. ألواح AE Solar، انفرترات Sinexcel، بطاريات Sunwoda، كابلات TOP CABLE الإسبانية.",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "عصر الشمس للاستيراد والتجارة",
     description: "حلول متكاملة وموثوقة لاستيراد، تركيب، وتشغيل أنظمة الطاقة الشمسية عالية الجودة.",
-    url: "https://asseralshams.com/",
+    url: "https://aseralshams.com/",
     siteName: "عصر الشمس",
     locale: "ar_YE",
     type: "website",
@@ -84,7 +84,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "EnergyBusiness",
               "name": "عصر الشمس",
-              "image": "https://asseralshams.com/og-image.jpg",
+              "image": "https://aseralshams.com/og-image.jpg",
               "description": "شركة عصر الشمس — رائدة في اليمن في استيراد وتركيب وتشغيل أنظمة الطاقة الشمسية. ألواح AE Solar، انفرترات Sinexcel، بطاريات Sunwoda.",
               "address": {
                 "@type": "PostalAddress",
@@ -96,7 +96,7 @@ export default function RootLayout({
                 "latitude": "15.3526", 
                 "longitude": "44.1537"
               },
-              "url": "https://asseralshams.com",
+              "url": "https://aseralshams.com",
               "telephone": "+967 777705977",
               "openingHoursSpecification": [
                 {

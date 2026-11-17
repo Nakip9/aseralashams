@@ -9,9 +9,13 @@ import { COMPANY, NAV_LINKS } from "./data";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const pathname = usePathname();
+  return <NavbarContent key={pathname} pathname={pathname} />;
+}
+
+function NavbarContent({ pathname }: { pathname: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
 
   // Detect scroll to transition the navbar into a floating glass pill
   useEffect(() => {
@@ -20,11 +24,6 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Automatically close the mobile menu when the route changes
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   return (
     <motion.header
@@ -80,7 +79,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Links */}
-          <ul className="hidden lg:flex items-center gap-1">
+          <ul className="hidden xl:flex items-center gap-1">
             {NAV_LINKS.map((link) => {
               // Strip hashes to correctly identify the active parent page
               const isActive = pathname === (link.route.split("#")[0] || "/");
@@ -119,9 +118,11 @@ export function Navbar() {
             <button
               type="button"
               aria-label="القائمة"
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
               onClick={() => setOpen((v) => !v)}
               className={cn(
-                "lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full transition-colors",
+                "xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-full transition-colors",
                 scrolled
                   ? "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   : "bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
@@ -140,7 +141,8 @@ export function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="lg:hidden mt-3 origin-top"
+              id="mobile-navigation"
+              className="xl:hidden mt-3 origin-top"
             >
               <div className="glass-strong rounded-3xl p-4 shadow-2xl border border-white/40">
                 <ul className="flex flex-col gap-2">
@@ -150,6 +152,7 @@ export function Navbar() {
                       <li key={link.route}>
                         <Link
                           href={link.route}
+                          onClick={() => setOpen(false)}
                           className={cn(
                             "block px-5 py-3.5 rounded-2xl text-base font-bold transition-all",
                             isActive
@@ -165,7 +168,8 @@ export function Navbar() {
                   <li className="mt-2">
                     <Link
                       href="/contact"
-                      className="w-full flecx items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-green to-brand-blue px-5 py-4 text-base font-bold text-white shadow-md"
+                      onClick={() => setOpen(false)}
+                      className="w-full flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-green to-brand-blue px-5 py-4 text-base font-bold text-white shadow-md"
                     >
                       <MessageSquare className="w-5 h-5" />
                       طلب عرض سعــر

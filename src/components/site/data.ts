@@ -147,5 +147,6 @@ export const NAV_LINKS = [
   { href: "#products", route: "/products", label: "منتجاتنا" },
   { href: "#services", route: "/#services", label: "خدماتنا" },
   { href: "#projects", route: "/projects", label: "مشاريعنا" },
+  { href: "/calculator", route: "/calculator", label: "احسب أحمالك" },
   { href: "#contact", route: "/contact", label: "تواصل معنا" },
 ];

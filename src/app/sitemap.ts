@@ -1,10 +1,15 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Update the .com here if your domain extension is different
-  const baseUrl = 'https://asseralshams.com'
+  const baseUrl = 'https://aseralshams.com'
 
   return [
+    {
+      url: `${baseUrl}/calculator`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
     {
       url: baseUrl,
       lastModified: new Date(),
